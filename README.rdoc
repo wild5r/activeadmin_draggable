@@ -70,48 +70,19 @@ Functionality was initialy created by @detomastah for one of our projects.
   Require +'activeadmin_draggable'+ on the top of your file.
 
   Add index action using newly added +:sortable_table+ view
- 
+
     ActiveAdmin.register Post do
-      config.sort_order = "position_asc"
 
-      index :as => :sortable_table do
-        config.sort_order = "posts.position ASC"
+       # set sort_order = "position_asc"
+       # add collection_action and +reorder+ button
+       add_reorder_mode
 
-        column :name
-        column :position
-     
-      end
-    
-      ...
+       ...
 
-    end
 
-  Add reorder action which is used to change position after droping item. 
-  First argument to +ActiveadminDraggable::DraggableListItem.move" method is class name of resource
-    
-      ...
-
-      collection_action :reorder, :method => :put do
-        ActiveadminDraggable::DraggableListItem.move(Post, params[:id], params[:left_id])
-
-        head(:ok)
-      end 
-
-      ...
-
-  Add +reorder+ button to index page
-  
-      ...
-
-      action_item :only => :index do
-        link_to 'Reorder mode', reorder_admin_posts_path, :class => "reorder", "data-on_text" => "Reorder mode", "data-off_text" => "Reorder mode off"
-      end 
-
-      ...
-
-  Texts can be of course changed. 
+  Texts can be of course changed.
     * data-off_text for disabling reorder mode
-    * data-on_text for enabling reorder mode 
+    * data-on_text for enabling reorder mode
 
 == Contributing
 
